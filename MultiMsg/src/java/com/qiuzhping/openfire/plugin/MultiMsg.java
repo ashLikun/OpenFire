@@ -1,6 +1,7 @@
 package com.qiuzhping.openfire.plugin;
 
 
+import org.dom4j.Attribute;
 import org.dom4j.Element;
 import org.jivesoftware.openfire.RoutingTable;
 import org.jivesoftware.openfire.XMPPServer;
@@ -86,18 +87,23 @@ public class MultiMsg implements PacketInterceptor, Plugin {
                         String fromResource = multiMsg.getFrom().getResource();
                         multiMsg.setTo(from);
                         for (Element sub : subject) {
-                            String lang = sub.attributeValue("xml:lang");
-                            debug("EEEEEEE----- multiMsg sub  =  " + sub.toString());
-                            debug("EEEEEEE----- multiMsg sub  =  " + sub.asXML());
-                            debug("EEEEEEE----- multiMsg sub  =  " + sub.getQualifiedName());
-                            debug("EEEEEEE----- multiMsg sub  =  " + sub.getStringValue());
-                            debug("EEEEEEE----- multiMsg sub  =  " + sub.getNodeTypeName());
-                            debug("EEEEEEE----- multiMsg sub2  =  " + sub.getQName().getQualifiedName());
-                            debug("EEEEEEE----- multiMsg sub2  =  " + sub.getQName().getNamespacePrefix());
-                            debug("EEEEEEE----- multiMsg sub2  =  " + sub.getQName().getName());
-                            debug("EEEEEEE----- multiMsg lang  =  " + lang);
-                            if (lang != null && lang.equals("oneself")) {
-                                sub.setText(oldTo.toFullJID());
+                            boolean isHaveOneself = false;
+                            List<Attribute> attrs = sub.attributes();
+                            if (attrs != null) {
+                                for (Attribute a : attrs) {
+                                    String value = a.getValue();
+                                    if (value != null && value.equals("oneself")) {
+                                        isHaveOneself = true;
+                                        break;
+                                    }
+                                }
+                            }
+                            if (isHaveOneself) {
+                                if (oldTo.getResource() == null) {
+                                    sub.setText(oldTo.toBareJID());
+                                } else {
+                                    sub.setText(oldTo.toFullJID());
+                                }
                                 debug("EEEEEEE----- multiMsg success  =  " + multiMsg.toXML());
                                 //如果 <subject xml:lang="MultiMsg">aaaaa</subject> 就代表要转发
                                 for (JID route : routingTable.getRoutes(from, null)) {
