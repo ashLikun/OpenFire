@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_multimsg" default="compile.module.multimsg">
+  <dirname property="module.multimsg.basedir" file="${ant.file.module_multimsg}"/>
+  
+  <property name="module.jdk.home.multimsg" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.multimsg" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.multimsg" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.multimsg" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="multimsg.output.dir" value="${module.multimsg.basedir}/../out/production/MultiMsg"/>
+  <property name="multimsg.testoutput.dir" value="${module.multimsg.basedir}/../out/test/MultiMsg"/>
+  
+  <path id="multimsg.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="multimsg.module.production.classpath">
+    <path refid="${module.jdk.classpath.multimsg}"/>
+    <pathelement location="${basedir}/openfire.jar"/>
+  </path>
+  
+  <path id="multimsg.runtime.production.module.classpath">
+    <pathelement location="${multimsg.output.dir}"/>
+    <pathelement location="${basedir}/openfire.jar"/>
+  </path>
+  
+  <path id="multimsg.module.classpath">
+    <path refid="${module.jdk.classpath.multimsg}"/>
+    <pathelement location="${multimsg.output.dir}"/>
+    <pathelement location="${basedir}/openfire.jar"/>
+  </path>
+  
+  <path id="multimsg.runtime.module.classpath">
+    <pathelement location="${multimsg.testoutput.dir}"/>
+    <pathelement location="${multimsg.output.dir}"/>
+    <pathelement location="${basedir}/openfire.jar"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.multimsg">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.multimsg">
+    <patternset refid="excluded.from.module.multimsg"/>
+  </patternset>
+  
+  <path id="multimsg.module.sourcepath">
+    <dirset dir="${module.multimsg.basedir}/../../MultiMsg">
+      <include name="src/java"/>
+      <include name="src/res"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.multimsg" depends="compile.module.multimsg.production,compile.module.multimsg.tests" description="Compile module MultiMsg"/>
+  
+  <target name="compile.module.multimsg.production" depends="register.custom.compilers" description="Compile module MultiMsg; production classes">
+    <mkdir dir="${multimsg.output.dir}"/>
+    <javac2 destdir="${multimsg.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.multimsg}/javac">
+      <compilerarg line="${compiler.args.multimsg}"/>
+      <bootclasspath refid="multimsg.module.bootclasspath"/>
+      <classpath refid="multimsg.module.production.classpath"/>
+      <src refid="multimsg.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.multimsg"/>
+    </javac2>
+    
+    <copy todir="${multimsg.output.dir}">
+      <fileset dir="${module.multimsg.basedir}/../src/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.multimsg.basedir}/../src/res">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.multimsg.tests" depends="register.custom.compilers,compile.module.multimsg.production" description="compile module MultiMsg; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.multimsg" description="cleanup module">
+    <delete dir="${multimsg.output.dir}"/>
+    <delete dir="${multimsg.testoutput.dir}"/>
+  </target>
+</project>

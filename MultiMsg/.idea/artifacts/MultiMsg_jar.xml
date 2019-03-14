@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="MultiMsg:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/MultiMsg</output-path>
+    <root id="archive" name="MultiMsg.jar">
+      <element id="module-output" name="MultiMsg" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/res/plugin.xml" />
+    </root>
+  </artifact>
+</component>
