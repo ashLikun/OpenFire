@@ -140,14 +140,14 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="7" />
-          <entry key="java" value="887" />
+          <entry key="java" value="892" />
           <entry key="properties" value="13" />
           <entry key="xml" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="887" />
+          <entry key="JAVA" value="892" />
           <entry key="PLAIN_TEXT" value="7" />
           <entry key="Properties" value="13" />
           <entry key="XML" value="7" />
@@ -160,8 +160,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/java/com/qiuzhping/openfire/plugin/MultiMsg.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="636">
-              <caret line="106" selection-start-line="106" selection-end-line="106" />
+            <state relative-caret-position="114">
+              <caret line="82" column="31" selection-start-line="82" selection-start-column="24" selection-end-line="82" selection-end-column="31" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#934#935#0" expanded="true" />
@@ -557,12 +557,12 @@
       <workItem from="1552542921308" duration="2043000" />
       <workItem from="1552545240258" duration="471000" />
       <workItem from="1552545728007" duration="1304000" />
-      <workItem from="1552547480669" duration="7221000" />
+      <workItem from="1552547480669" duration="7815000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="113978000" />
+    <option name="totallyTimeSpent" value="114572000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1874" height="1096" extended-state="6" />
@@ -937,8 +937,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/java/com/qiuzhping/openfire/plugin/MultiMsg.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="636">
-          <caret line="106" selection-start-line="106" selection-end-line="106" />
+        <state relative-caret-position="114">
+          <caret line="82" column="31" selection-start-line="82" selection-start-column="24" selection-end-line="82" selection-end-column="31" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#934#935#0" expanded="true" />

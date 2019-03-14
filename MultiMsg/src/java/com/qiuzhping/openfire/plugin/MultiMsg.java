@@ -82,9 +82,10 @@ public class MultiMsg implements PacketInterceptor, Plugin {
                     List<Element> subject = message.getElement().elements("subject");
                     if (subject != null && !subject.isEmpty()) {
                         Message multiMsg = message.createCopy();
+                        String fromResource = multiMsg.getFrom().getResource();
+                        subject = multiMsg.getElement().elements("subject");
                         JID from = new JID(multiMsg.getFrom().toBareJID());
                         JID oldTo = multiMsg.getTo();
-                        String fromResource = multiMsg.getFrom().getResource();
                         multiMsg.setTo(from);
                         for (Element sub : subject) {
                             boolean isHaveOneself = false;
